@@ -56,11 +56,11 @@ def countdown():
 
   # Timer ran out
   if int(timer.get()) == 0:
+    # Fire the buzzer
+    pygame.mixer.music.play(1)
     # Start flashing and pause the clock
     flash(True, 0)
     is_paused = True
-    # Fire the buzzer
-    pygame.mixer.music.play("/home/pi/src/python/shotclock/buzzer.mp3")
     return
 
   # Update the clock's colors
@@ -132,7 +132,7 @@ root.attributes("-fullscreen", True)
 timer = StringVar()
 
 # Label to shot current clock time in big red letters
-lbl = Label(root, textvariable=timer, width=2, height=1, font=("DS-Digital", 800))
+lbl = Label(root, textvariable=timer, width=2, height=1, font=("DS-Digital", 1100))
 lbl.pack()
 
 # Reset the clock to max on Enter pressed
