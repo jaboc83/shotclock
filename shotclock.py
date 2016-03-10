@@ -118,6 +118,7 @@ def decrement_clock(e):
   set_clock_colors()
 
 # Initialize for sound
+pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 pygame.mixer.init()
 # buzzer sound
@@ -132,7 +133,7 @@ root.attributes("-fullscreen", True)
 timer = StringVar()
 
 # Label to shot current clock time in big red letters
-lbl = Label(root, textvariable=timer, width=2, height=1, font=("DS-Digital", 1100))
+lbl = Label(root, textvariable=timer, width=2, height=1, font=("DS-Digital", 1000))
 lbl.pack()
 
 # Reset the clock to max on Enter pressed
