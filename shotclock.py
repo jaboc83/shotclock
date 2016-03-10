@@ -57,10 +57,10 @@ def countdown():
   # Timer ran out
   if int(timer.get()) == 0:
     # Start flashing and pause the clock
-    flash(True)
+    flash(True, 0)
     is_paused = True
     # Fire the buzzer
-    buzzer.play()
+    pygame.mixer.music.play("/home/pi/src/python/shotclock/buzzer.mp3")
     return
 
   # Update the clock's colors
@@ -70,7 +70,7 @@ def countdown():
   root.after(one_second, countdown)
 
 # Flash the clock colors between normal and flipped
-def flash(use_fliped, flashcount):
+def flash(use_flipped, flashcount):
   flashcount += 1
 
   if use_flipped:
@@ -118,9 +118,10 @@ def decrement_clock(e):
   set_clock_colors()
 
 # Initialize for sound
+pygame.init()
 pygame.mixer.init()
 # buzzer sound
-buzzer = Sound("./buzzer.mp3")
+pygame.mixer.music.load("/home/pi/src/python/shotclock/buzzer.mp3")
 
 # root UI element
 root = Tk()
@@ -139,9 +140,9 @@ root.bind("<Return>", reset);
 # Pause/Resume the clock on Space pressed
 root.bind("<space>", toggle_clock);
 # Increment the clock on up arrow pressed
-root.bind("<Up>", increment);
+root.bind("<Up>", increment_clock);
 # Decrement the clock on down arrow pressed
-root.bind("<Down>", decrement);
+root.bind("<Down>", decrement_clock);
 
 # Set the clock to Max initially
 reset(None)
