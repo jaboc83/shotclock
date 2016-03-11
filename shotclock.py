@@ -86,9 +86,13 @@ def flash(use_flipped, flashcount):
 # Reset the clock to max time and pause
 def reset(e):
   global max_clock
-  global is_paused
-  is_paused = True
   timer.set(str(max_clock))
+  use_normal_colors()
+
+def reset_14_or_better(e):
+	if int(timer.get()) < 14:
+		timer.set(str(14))
+		use_normal_colors()
 
 # toggle the clock running/paused state
 def toggle_clock(e):
@@ -138,6 +142,8 @@ lbl.pack()
 
 # Reset the clock to max on Enter pressed
 root.bind("<Return>", reset);
+# Reset the clock to 14 if less else leave it be
+root.bind("h", reset_14_or_better);
 # Pause/Resume the clock on Space pressed
 root.bind("<space>", toggle_clock);
 # Increment the clock on up arrow pressed
